@@ -31,7 +31,7 @@ ENV DB_USERNAME=360271_electro
 ENV DB_PASSWORD=electro_react
 
 # Exponer el puerto
-EXPOSE 80
+EXPOSE 8000
 
 # Comando para iniciar la aplicación
 CMD ["php", "artisan", "serve", "--host", "0.0.0.0", "--port", "8000"]
