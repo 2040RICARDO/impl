@@ -1,24 +1,5 @@
-# Usar una imagen base con PHP y Composer preinstalados
-FROM php:8.2-apache
-
-# Instalar dependencias adicionales de sistema
-RUN apt-get update && apt-get install -y \
-    git \
-    unzip \
-    curl \
-    libpng-dev \
-    libjpeg62-turbo-dev \
-    libfreetype6-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd \
-    && docker-php-ext-install pdo pdo_mysql
-
-# Instalar Composer globalmente
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Instalar Node.js y npm
-RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs
+# Usar una imagen base que contenga PHP, Composer y Node.js
+FROM laravelsail/php82-composer:latest
 
 # Establecer el directorio de trabajo
 WORKDIR /var/www/html
@@ -29,8 +10,15 @@ COPY . .
 # Instalar dependencias de PHP
 RUN composer install --no-dev --optimize-autoloader
 
+# Instalar Node.js y npm
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs
+
 # Instalar dependencias de Node.js
-RUN npm install && npm run prod
+RUN npm install
+
+# Construir los activos con Vite
+RUN npm run build
 
 # Establecer las variables de entorno
 ENV APP_ENV=production
@@ -46,4 +34,4 @@ ENV DB_PASSWORD=your_db_password
 EXPOSE 80
 
 # Comando para iniciar la aplicación
-CMD ["apache2-foreground"]
+CMD ["php", "artisan", "serve", "--host", "0.0.0.0", "--port", "80"]
