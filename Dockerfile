@@ -21,17 +21,17 @@ RUN npm install
 RUN npm run build
 
 # Establecer las variables de entorno
-ENV APP_ENV=production
-ENV APP_KEY=base64:your_app_key
+ENV APP_ENV=local
+ENV APP_KEY=base64:LxC2QdVkDvID/xwhxaELvPNExfo9/5stPhM6wqDO3xU=
 ENV DB_CONNECTION=mysql
-ENV DB_HOST=your_db_host
-ENV DB_PORT=your_db_port
-ENV DB_DATABASE=your_db_name
-ENV DB_USERNAME=your_db_username
-ENV DB_PASSWORD=your_db_password
+ENV DB_HOST=mysql-react-laravel.alwaysdata.net
+ENV DB_PORT=3306
+ENV DB_DATABASE=react-laravel_electro
+ENV DB_USERNAME=360271_electro
+ENV DB_PASSWORD=electro_react
 
 # Exponer el puerto
 EXPOSE 80
 
 # Comando para iniciar la aplicación
-CMD ["php", "artisan", "serve", "--host", "0.0.0.0", "--port", "80"]
+CMD ["php", "artisan", "serve", "--host", "0.0.0.0", "--port", "8000"]
