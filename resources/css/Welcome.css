@@ -1,0 +1,16 @@
+.welcome-container {
+    position: relative;
+}
+
+.triangle {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent; /* Añadido */
+    border-bottom: 50px solid yellow; /* Cambiado a amarillo */
+    border-top: none; /* Añadido */
+    position: absolute;
+    top: 20px; /* Ajusta la distancia desde la parte superior */
+    right: 20px; /* Ajusta la distancia desde la derecha */
+    z-index: 1; /* Asegura que el triángulo esté en la parte superior */
+}

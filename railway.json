@@ -1,0 +1,9 @@
+{
+    "build": {
+      "builder": "Docker",
+      "dockerfile": "Dockerfile"
+    },
+    "deploy": {
+      "command": "php artisan migrate --force"
+    }
+  }
